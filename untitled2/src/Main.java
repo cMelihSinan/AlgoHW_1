@@ -51,5 +51,61 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Error loading lists: " + e.getMessage());
         }
+        try {
+            // Load all lists using ListLoader
+            List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
+
+            // Get the median for each list using MaxHeapMedian
+            for (int i = 0; i < lists.size(); i++) {
+                List<Integer> list = lists.get(i);
+                int median = MaxHeapMedian.getMaxHeapMedian(list);
+
+                System.out.println("Median of list MaxHeapMedian " + (i + 1) + ": " + median);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading lists: " + e.getMessage());
+        }
+        try {
+            // Load all lists using ListLoader
+            List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
+
+            // Get the median for each list using QuickSelectMedian
+            for (int i = 0; i < lists.size(); i++) {
+                List<Integer> list = lists.get(i);
+                int median = QuickSelectMedian.getMedian(list);
+
+                System.out.println("Median of list QuickSelectMedian " + (i + 1) + ": " + median);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading lists: " + e.getMessage());
+        }
+        try {
+            // Load all lists using ListLoader
+            List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
+
+            // Get the median for each list using QuickSelectMedianOfThree
+            for (int i = 0; i < lists.size(); i++) {
+                List<Integer> list = lists.get(i);
+                int median = QuickSelectMedianOfThree.getMedian(list);
+
+                System.out.println("Median of list MedianOfThree" + (i + 1) + ": " + median);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading lists: " + e.getMessage());
+        }
+        try {
+            // Load all lists using ListLoader
+            List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
+
+            // Get the median for each list using QuickSelectMedianOfMedians
+            for (int i = 0; i < lists.size(); i++) {
+                List<Integer> list = lists.get(i);
+                int median = QuickSelectMedianOfMedians.getMedian(list);
+
+                System.out.println("Median of list MedianOfMedians " + (i + 1) + ": " + median);
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading lists: " + e.getMessage());
+        }
     }
 }
