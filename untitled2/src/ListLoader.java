@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListLoader {
 
-    // Helper method to read a list from a text file
+    //Reading lists from the text file
     public static List<Integer> readListFromFile(String filePath) throws IOException {
         List<Integer> list = new ArrayList<>();
         Path path = Paths.get(filePath);
@@ -24,16 +24,15 @@ public class ListLoader {
         return list;
     }
 
-    // Main method to read all 16 files and generate lists
     public static List<List<Integer>> loadLists(String srcDirectory) throws IOException {
         List<List<Integer>> allLists = new ArrayList<>();
 
-        // Subdirectories and filenames for each category
+        //Names of the lists to be checked
         String[] categories = {"Duplicated", "Random", "ReverseSorted", "Sorted"};
         String[] extensions = {"_duplicated_var", "_rand_var", "_reverseSorted_var", "_sorted_var"};
         String[] sizes = {"10", "100", "1,000", "10,000"};
 
-        // Iterate over categories and sizes to construct the file paths
+        //Checking and parsing names of lists
         for (int categoryIndex = 0; categoryIndex < categories.length; categoryIndex++) {
             String category = categories[categoryIndex];
             for (int sizeIndex = 0; sizeIndex < sizes.length; sizeIndex++) {
@@ -44,13 +43,13 @@ public class ListLoader {
 
                 try {
                     List<Integer> list = readListFromFile(filePath);
-                    allLists.add(list); // Add the generated list to the collection
+                    allLists.add(list); //Adding lists to another list
                 } catch (FileNotFoundException e) {
                     System.err.println("Error loading lists: " + e.getMessage());
                 }
             }
         }
 
-        return allLists; // Return all generated lists
+        return allLists; //Returning all lists
     }
 }
