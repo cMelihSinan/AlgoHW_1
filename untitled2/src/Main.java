@@ -11,10 +11,10 @@ public class Main {
 
         // Define the list names for each ID
         String[] listNames = {
-                "Duplicated_10", "Duplicated_100", "Duplicated_1000", "Duplicated_10000",
-                "Random_10", "Random_100", "Random_1000", "Random_10000",
-                "Sorted_10", "Sorted_100", "Sorted_1000", "Sorted_10000",
-                "ReverseSorted_10", "ReverseSorted_100", "ReverseSorted_1000", "ReverseSorted_10000"
+                "10 Duplicated", "100 Duplicated", "1,000Duplicated", "10,000 Duplicated",
+                "10 Random", "100 Random", "1,000 Random", "10,000 Random",
+                "10 Sorted", "100 Sorted", "1,000 Sorted", "10,000 Sorted",
+                "10 ReverseSorted", "100 ReverseSorted", "1,000 ReverseSorted", "10,000 ReverseSorted"
         };
 
         try {
@@ -34,10 +34,11 @@ public class Main {
             System.err.println("Error loading lists: " + e.getMessage());
         }
 
-        // Output formatted table
-        System.out.println("Algorithm\tList ID\tList Name\tMedian\tExecution Time (ns)");
+        //Table of Algorithm, list id, list name, median and execution time
+        System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Execution Time (ns)");
+        System.out.println("---------------------------------------------------------------------------------------");
         for (AlgorithmResult result : results) {
-            System.out.printf("%-20s\t%-10d\t%-20s\t%-10d\t%-15d\n",
+            System.out.printf("%-30s\t%-10d\t%-20s\t%-10d\t%-15d\n",
                     result.algorithm,
                     result.listId,
                     result.listName,
