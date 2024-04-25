@@ -5,7 +5,7 @@ public class AlgorithmResult {
     int median;
     int operationCount;
     long executionTime;
-
+    // Constructor to initialize all attributes of AlgorithmResult
     public AlgorithmResult(String algorithm, int listId, String listName, int median, int operationCount, long executionTime) {
         this.algorithm = algorithm;
         this.listId = listId;
@@ -29,7 +29,7 @@ public class AlgorithmResult {
 
     public void setListId(int listId) {
         this.listId = listId;
-    }
+    } //method to update the list identifier
 
     public String getListName() {
         return listName;

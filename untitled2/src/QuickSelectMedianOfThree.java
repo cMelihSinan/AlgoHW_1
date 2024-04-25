@@ -2,7 +2,7 @@ import java.util.List;
 
 public class QuickSelectMedianOfThree {
 
-    // Method to find the median of three elements (first, middle, last)
+
     private static int medianOfThree(List<Integer> list, int low, int high, int operationCount) {
         int mid = low + (high - low) / 2;
         int first = list.get(low);
@@ -16,17 +16,17 @@ public class QuickSelectMedianOfThree {
                 return low; // First is the median
             } else if (middle > last) {
                 operationCount++; // Increment operation count for comparison
-                return mid; // Middle is the median
+                return mid; // Middle is the median.
             } else {
-                return high; // Last is the median
+                return high; // Last is the median.
             }
         } else {
-            operationCount++; // Increment operation count for comparison
+            operationCount++; // Increase operation count for comparison
             if (first > last) {
                 operationCount++; // Increment operation count for comparison
                 return low; // First is the median
             } else if (middle < last) {
-                operationCount++; // Increment operation count for comparison
+                operationCount++; // Increase operation count for comparison
                 return mid; // Middle is the median
             } else {
                 return high; // Last is the median
@@ -50,25 +50,25 @@ public class QuickSelectMedianOfThree {
         while (i <= j) {
             while (i <= high && list.get(i) <= pivot) {
                 i++;
-                operationCount++; // Increment operation count for each comparison
+                operationCount++; // Increase operation count for each comparison
             }
 
             while (j >= low && list.get(j) > pivot) {
                 j--;
-                operationCount++; // Increment operation count for each comparison
+                operationCount++; // Increase operation count for each comparison
             }
 
             if (i < j) {
                 int temp = list.get(i);
                 list.set(i, list.get(j));
                 list.set(j, temp);
-                operationCount++; // Increment operation count for each swap
+                operationCount++; // Increase operation count for each swap
             }
         }
 
         list.set(low, list.get(j));
         list.set(j, pivot);
-        operationCount++; // Increment operation count for the swap
+        operationCount++; // Increase operation count for the swap
 
         return new int[]{j, operationCount}; // Return pivot index and operation count
     }
@@ -88,10 +88,10 @@ public class QuickSelectMedianOfThree {
                 return quickSelect(list, pivotIndex + 1, high, k, operationCount);
             }
         }
-        return new int[]{-1, operationCount}; // Fallback case (shouldn't happen)
+        return new int[]{-1, operationCount}; //fallback case
     }
 
-    // Method to get the median using QuickSelect with median-of-three pivot selection
+    // QuickSelect with median-of-three pivot selection
     public static int[] getMedianAndOperationCount(List<Integer> list) {
         int n = list.size();
         int medianIndex = (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉

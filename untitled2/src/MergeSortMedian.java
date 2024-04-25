@@ -8,7 +8,7 @@ public class MergeSortMedian {
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-        // Create temporary arrays
+        // create temporary arrays
         List<Integer> leftArray = new ArrayList<>(n1);
         List<Integer> rightArray = new ArrayList<>(n2);
 
@@ -20,7 +20,7 @@ public class MergeSortMedian {
             rightArray.add(list.get(mid + 1 + i));
         }
 
-        // Merge the temporary arrays back into list
+        // Merge temporary arrays back into list
         int i = 0, j = 0;
         int k = left;
         while (i < n1 && j < n2) {
@@ -46,7 +46,7 @@ public class MergeSortMedian {
             list.set(k, rightArray.get(j));
             j++;
             k++;
-            operationCount++; // Increment operation count for each swap
+            operationCount++; // Increment operation count for each swap.
         }
 
         return operationCount;
@@ -67,7 +67,7 @@ public class MergeSortMedian {
         return new int[]{list.get(getMedianIndex(list)), operationCount}; // Return the median and operation count
     }
 
-    // Method to get the median index
+    // Method to get the median indexes
     public static int getMedianIndex(List<Integer> list) {
         int n = list.size();
         return (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class QuickSelectMedianOfMedians {
 
-    // Method to find the median of a list
+    // median of a list
     private static int[] findMedian(List<Integer> list, int operationCount) {
         Collections.sort(list); // Sort the list to find the median
         operationCount += list.size(); // Increment operation count for sorting
@@ -12,7 +12,7 @@ public class QuickSelectMedianOfMedians {
         return new int[]{list.get(mid), operationCount}; // Return the middle element as the median and operation count
     }
 
-    // Method to get the median-of-medians pivot
+    // median-of-medians pivot
     private static int[] getMedianOfMedians(List<Integer> list, int low, int high, int operationCount) {
         // Divide the list into groups of 5 elements each
         List<List<Integer>> groups = new ArrayList<>();
@@ -45,7 +45,7 @@ public class QuickSelectMedianOfMedians {
         // Swap the pivot to the beginning for consistency
         list.set(pivotIndex, list.get(low));
         list.set(low, pivot);
-        operationCount++; // Increment operation count for the swap
+        operationCount++; // Increase operation count for the swap
 
         int i = low + 1;
         int j = high;
@@ -53,25 +53,25 @@ public class QuickSelectMedianOfMedians {
         while (i <= j) {
             while (i <= high && list.get(i) <= pivot) {
                 i++;
-                operationCount++; // Increment operation count for each comparison
+                operationCount++; // Increase operation count for each comparison
             }
 
             while (j >= low && list.get(j) > pivot) {
                 j--;
-                operationCount++; // Increment operation count for each comparison
+                operationCount++; // Increase operation count for each comparison
             }
 
             if (i < j) {
                 int temp = list.get(i);
                 list.set(i, list.get(j));
                 list.set(j, temp);
-                operationCount++; // Increment operation count for each swap
+                operationCount++; // Increase operation count for each swap
             }
         }
 
         list.set(low, list.get(j));
         list.set(j, pivot);
-        operationCount++; // Increment operation count for the swap
+        operationCount++; // Increase operation count for the swap
 
         return new int[]{j, operationCount};
     }
@@ -94,7 +94,7 @@ public class QuickSelectMedianOfMedians {
         return new int[]{-1, operationCount}; // Fallback case (shouldn't happen)
     }
 
-    // Method to get the median using QuickSelect with median-of-medians pivot selection
+    // median using QuickSelect with median-of-medians pivot selection
     public static int[] getMedianAndOperationCount(List<Integer> list) {
         int n = list.size();
         int medianIndex = (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉

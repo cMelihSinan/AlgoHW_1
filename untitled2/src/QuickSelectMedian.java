@@ -30,7 +30,7 @@ public class QuickSelectMedian {
             }
         }
 
-        // Place pivot in the correct position
+        // Place pivotting in the correct position
         list.set(low, list.get(j));
         list.set(j, pivot);
         operationCount++; // Increment operation count for the swap

@@ -4,7 +4,7 @@ import java.util.List;
 public class InsertionSortMedian {
 
     // Method to perform insertion sort on a list of integers
-    public static int[] insertionSort(List<Integer> list) {
+    public static int[] insertionSort(List<Integer> list) { //Constructor (unused in this case, but usually needed for instantiation)
         int operationCount = 0;
         for (int i = 1; i < list.size(); i++) {
             int key = list.get(i);

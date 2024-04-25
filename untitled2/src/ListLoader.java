@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListLoader {
 
-    //Reading lists from the text file
+    //reading lists from the text filew
     public static List<Integer> readListFromFile(String filePath) throws IOException {
         List<Integer> list = new ArrayList<>();
         Path path = Paths.get(filePath);
@@ -27,12 +27,12 @@ public class ListLoader {
     public static List<List<Integer>> loadLists(String srcDirectory) throws IOException {
         List<List<Integer>> allLists = new ArrayList<>();
 
-        //Names of the lists to be checked
+        //names of the lists to be checked
         String[] categories = {"Duplicated", "Random", "ReverseSorted", "Sorted"};
         String[] extensions = {"_duplicated_var", "_rand_var", "_reverseSorted_var", "_sorted_var"};
         String[] sizes = {"10", "100", "1,000", "10,000"};
 
-        //Checking and parsing names of lists
+        //Checking and parsing names of listu
         for (int categoryIndex = 0; categoryIndex < categories.length; categoryIndex++) {
             String category = categories[categoryIndex];
             for (int sizeIndex = 0; sizeIndex < sizes.length; sizeIndex++) {

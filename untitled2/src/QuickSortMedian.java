@@ -3,7 +3,7 @@ import java.util.List;
 
 public class QuickSortMedian {
 
-    // Partition function for QuickSort
+    //partition function for QuickSort
     private static int[] partition(List<Integer> list, int low, int high, int operationCount) {
         int pivot = list.get(low); // Choose the first element as pivot
         int i = low + 1;
@@ -34,7 +34,7 @@ public class QuickSortMedian {
         // Place pivot in the correct position
         list.set(low, list.get(j));
         list.set(j, pivot);
-        operationCount++; // Increment operation count for the swap
+        operationCount++; // Increase operation count for the swap
 
         return new int[]{j, operationCount}; // Return pivot index and operation count
     }
@@ -54,14 +54,14 @@ public class QuickSortMedian {
         return new int[]{list.get(getMedianIndex(list)), operationCount}; // Return the median and operation count
     }
 
-    // Method to get the median index
+    // median index
     public static int getMedianIndex(List<Integer> list) {
         int n = list.size();
         return (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉
     }
 
-    // Method to get the median after sorting the list with QuickSort
+    //median after sorting the list with QuickSort
     public static int[] getMedianAndOperationCount(List<Integer> list) {
-        return quickSort(list, 0, list.size() - 1, 0); // Sort the list and get the median and operation count
+        return quickSort(list, 0, list.size() - 1, 0); //median and operation count
     }
 }

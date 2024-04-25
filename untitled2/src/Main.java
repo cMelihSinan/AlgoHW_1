@@ -21,7 +21,7 @@ public class Main {
             // Load all lists using ListLoader
             List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
 
-            // Record results for each algorithm
+            // // Record results for various algorithms by using a specific median-finding function
             recordResults("InsertionSort", lists, results, InsertionSortMedian::getMedianAndOperationCount, listNames);
             recordResults("MergeSort", lists, results, MergeSortMedian::getMedianAndOperationCount, listNames);
             recordResults("QuickSort", lists, results, QuickSortMedian::getMedianAndOperationCount, listNames);
@@ -34,7 +34,7 @@ public class Main {
             System.err.println("Error loading lists: " + e.getMessage());
         }
 
-        //Table of Algorithm, list id, list name, median, operation count and execution time
+        //Table of algorihtmm, list id, list name, median, operation count and execution time
         System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Operation Count\tExecution Time (ns)");
         System.out.println("-----------------------------------------------------------------------------------------------------------------");
         for (AlgorithmResult result : results) {
@@ -51,7 +51,7 @@ public class Main {
         analyzeResults(results);
     }
 
-    // Helper method to record results for a specific algorithm
+    // helper method to record results for a specific algorithm
     public static void recordResults(String algorithmName, List<List<Integer>> lists, List<AlgorithmResult> results,
                                      AlgorithmFunction algorithmFunction, String[] listNames) {
 
