@@ -4,7 +4,7 @@ import java.util.List;
 public class MergeSortMedian {
 
     // Merge function for merge sort
-    private static void merge(List<Integer> list, int left, int mid, int right) {
+    private static int merge(List<Integer> list, int left, int mid, int right, int operationCount) {
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
@@ -32,6 +32,7 @@ public class MergeSortMedian {
                 j++;
             }
             k++;
+            operationCount++; // Increment operation count for each comparison and swap
         }
 
         // Copy remaining elements, if any
@@ -39,33 +40,41 @@ public class MergeSortMedian {
             list.set(k, leftArray.get(i));
             i++;
             k++;
+            operationCount++; // Increment operation count for each swap
         }
         while (j < n2) {
             list.set(k, rightArray.get(j));
             j++;
             k++;
+            operationCount++; // Increment operation count for each swap
         }
+
+        return operationCount;
     }
 
     // Recursive merge sort function
-    public static void mergeSort(List<Integer> list, int left, int right) {
+    public static int[] mergeSort(List<Integer> list, int left, int right, int operationCount) {
         if (left < right) {
             int mid = (left + right) / 2;
 
             // Recursively sort the halves
-            mergeSort(list, left, mid);
-            mergeSort(list, mid + 1, right);
+            operationCount = mergeSort(list, left, mid, operationCount)[1];
+            operationCount = mergeSort(list, mid + 1, right, operationCount)[1];
 
             // Merge the sorted halves
-            merge(list, left, mid, right);
+            operationCount = merge(list, left, mid, right, operationCount);
         }
+        return new int[]{list.get(getMedianIndex(list)), operationCount}; // Return the median and operation count
+    }
+
+    // Method to get the median index
+    public static int getMedianIndex(List<Integer> list) {
+        int n = list.size();
+        return (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉
     }
 
     // Method to get the median after sorting the list with merge sort
-    public static int getMedian(List<Integer> list) {
-        mergeSort(list, 0, list.size() - 1); // Sort the list
-        int n = list.size();
-        int medianIndex = (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉
-        return list.get(medianIndex - 1); // Return the median (subtract 1 for zero-based indexing)
+    public static int[] getMedianAndOperationCount(List<Integer> list) {
+        return mergeSort(list, 0, list.size() - 1, 0); // Sort the list and get the median and operation count
     }
 }

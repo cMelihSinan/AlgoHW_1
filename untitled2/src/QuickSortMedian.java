@@ -4,7 +4,7 @@ import java.util.List;
 public class QuickSortMedian {
 
     // Partition function for QuickSort
-    private static int partition(List<Integer> list, int low, int high) {
+    private static int[] partition(List<Integer> list, int low, int high, int operationCount) {
         int pivot = list.get(low); // Choose the first element as pivot
         int i = low + 1;
         int j = high;
@@ -13,11 +13,13 @@ public class QuickSortMedian {
             // Move elements smaller than pivot to the left
             while (i <= high && list.get(i) <= pivot) {
                 i++;
+                operationCount++; // Increment operation count for each comparison
             }
 
             // Move elements larger than pivot to the right
             while (j >= low && list.get(j) > pivot) {
                 j--;
+                operationCount++; // Increment operation count for each comparison
             }
 
             if (i < j) {
@@ -25,33 +27,41 @@ public class QuickSortMedian {
                 int temp = list.get(i);
                 list.set(i, list.get(j));
                 list.set(j, temp);
+                operationCount++; // Increment operation count for each swap
             }
         }
 
         // Place pivot in the correct position
         list.set(low, list.get(j));
         list.set(j, pivot);
+        operationCount++; // Increment operation count for the swap
 
-        return j; // Return pivot index
+        return new int[]{j, operationCount}; // Return pivot index and operation count
     }
 
     // Recursive QuickSort function
-    public static void quickSort(List<Integer> list, int low, int high) {
+    public static int[] quickSort(List<Integer> list, int low, int high, int operationCount) {
         if (low < high) {
             // Partition and get the pivot index
-            int pivotIndex = partition(list, low, high);
+            int[] partitionResult = partition(list, low, high, operationCount);
+            int pivotIndex = partitionResult[0];
+            operationCount = partitionResult[1];
 
             // Recursively sort elements before and after the pivot
-            quickSort(list, low, pivotIndex - 1);
-            quickSort(list, pivotIndex + 1, high);
+            operationCount = quickSort(list, low, pivotIndex - 1, operationCount)[1];
+            operationCount = quickSort(list, pivotIndex + 1, high, operationCount)[1];
         }
+        return new int[]{list.get(getMedianIndex(list)), operationCount}; // Return the median and operation count
+    }
+
+    // Method to get the median index
+    public static int getMedianIndex(List<Integer> list) {
+        int n = list.size();
+        return (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉
     }
 
     // Method to get the median after sorting the list with QuickSort
-    public static int getMedian(List<Integer> list) {
-        quickSort(list, 0, list.size() - 1); // Sort the list
-        int n = list.size();
-        int medianIndex = (n % 2 == 0) ? (n / 2) : ((n / 2) + 1); // ⌈𝑛/2⌉
-        return list.get(medianIndex - 1); // Return the median (subtract 1 for zero-based indexing)
+    public static int[] getMedianAndOperationCount(List<Integer> list) {
+        return quickSort(list, 0, list.size() - 1, 0); // Sort the list and get the median and operation count
     }
 }

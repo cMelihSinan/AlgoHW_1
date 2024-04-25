@@ -22,27 +22,28 @@ public class Main {
             List<List<Integer>> lists = ListLoader.loadLists(srcDirectory);
 
             // Record results for each algorithm
-            recordResults("InsertionSort", lists, results, InsertionSortMedian::getMedian, listNames);
-            recordResults("MergeSort", lists, results, MergeSortMedian::getMedian, listNames);
-            recordResults("QuickSort", lists, results, QuickSortMedian::getMedian, listNames);
+            recordResults("InsertionSort", lists, results, InsertionSortMedian::getMedianAndOperationCount, listNames);
+            recordResults("MergeSort", lists, results, MergeSortMedian::getMedianAndOperationCount, listNames);
+            recordResults("QuickSort", lists, results, QuickSortMedian::getMedianAndOperationCount, listNames);
             recordResults("MaxHeapMedian", lists, results, MaxHeapMedian::getMaxHeapMedian, listNames);
-            recordResults("QuickSelectMedian", lists, results, QuickSelectMedian::getMedian, listNames);
-            recordResults("QuickSelectMedianOfThree", lists, results, QuickSelectMedianOfThree::getMedian, listNames);
-            recordResults("QuickSelectMedianOfMedians", lists, results, QuickSelectMedianOfMedians::getMedian, listNames);
+            recordResults("QuickSelectMedian", lists, results, QuickSelectMedian::getMedianAndOperationCount, listNames);
+            recordResults("QuickSelectMedianOfThree", lists, results, QuickSelectMedianOfThree::getMedianAndOperationCount, listNames);
+            recordResults("QuickSelectMedianOfMedians", lists, results, QuickSelectMedianOfMedians::getMedianAndOperationCount, listNames);
 
         } catch (IOException e) {
             System.err.println("Error loading lists: " + e.getMessage());
         }
 
-        //Table of Algorithm, list id, list name, median and execution time
-        System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Execution Time (ns)");
-        System.out.println("---------------------------------------------------------------------------------------");
+        //Table of Algorithm, list id, list name, median, operation count and execution time
+        System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Operation Count\t  Execution Time (ns)");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------");
         for (AlgorithmResult result : results) {
-            System.out.printf("%-30s\t%-10d\t%-20s\t%-10d\t%-15d\n",
+            System.out.printf("%-30s\t%-10d\t%-20s\t%-10d\t%-15d\t%-15d\n",
                     result.algorithm,
                     result.listId,
                     result.listName,
                     result.median,
+                    result.operationCount,
                     result.executionTime);
         }
 
@@ -52,16 +53,17 @@ public class Main {
 
     // Helper method to record results for a specific algorithm
     public static void recordResults(String algorithmName, List<List<Integer>> lists, List<AlgorithmResult> results,
-                                      AlgorithmFunction algorithmFunction, String[] listNames) {
+                                     AlgorithmFunction algorithmFunction, String[] listNames) {
 
         for (int i = 0; i < lists.size(); i++) {
             List<Integer> list = new ArrayList<>(lists.get(i)); // Use a copy to avoid modifying the original list
             long startTime = System.nanoTime(); // Start measuring time
-            int median = algorithmFunction.findMedian(list);
+            int[] result = algorithmFunction.findMedianAndOperationCount(list);
+            int median = result[0];
+            int operationCount = result[1];
             long endTime = System.nanoTime(); // End measuring time
 
-            results.add(new AlgorithmResult(algorithmName, i + 1, listNames[i], median, (endTime - startTime)));
-        }
+            results.add(new AlgorithmResult(algorithmName, i + 1, listNames[i], median, operationCount, (endTime - startTime)));        }
     }
 
     // Method to analyze and discuss the results
@@ -86,6 +88,6 @@ public class Main {
     // Functional interface for median-finding functions
     @FunctionalInterface
     interface AlgorithmFunction {
-        int findMedian(List<Integer> list);
+        int[] findMedianAndOperationCount(List<Integer> list);
     }
 }
