@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String srcDirectory = "/Users/melihsinancubukcuoglu/IdeaProjects/AlgoHW_1/untitled2/src"; // Adjust this path to your source directory
+        String srcDirectory = "./untitled2/src"; // relative path have been set
 
         // Define a structure to hold the results
         List<AlgorithmResult> results = new ArrayList<>();
