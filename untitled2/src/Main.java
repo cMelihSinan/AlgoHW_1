@@ -11,7 +11,7 @@ public class Main {
 
         // Define the list names for each ID
         String[] listNames = {
-                "10 Duplicated", "100 Duplicated", "1,000Duplicated", "10,000 Duplicated",
+                "10 Duplicated", "100 Duplicated", "1,000 Duplicated", "10,000 Duplicated",
                 "10 Random", "100 Random", "1,000 Random", "10,000 Random",
                 "10 Sorted", "100 Sorted", "1,000 Sorted", "10,000 Sorted",
                 "10 ReverseSorted", "100 ReverseSorted", "1,000 ReverseSorted", "10,000 ReverseSorted"
@@ -35,7 +35,7 @@ public class Main {
         }
 
         //Table of Algorithm, list id, list name, median, operation count and execution time
-        System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Operation Count\t  Execution Time (ns)");
+        System.out.println("Algorithm\t\t\t\t\t  List ID\t\tList Name\t\t\t  Median\t  Operation Count\tExecution Time (ns)");
         System.out.println("-----------------------------------------------------------------------------------------------------------------");
         for (AlgorithmResult result : results) {
             System.out.printf("%-30s\t%-10d\t%-20s\t%-10d\t%-15d\t%-15d\n",
